@@ -52,7 +52,7 @@ autant que possible les contraintes.
 ### _Fichiers_
 **- DONNEES :** Fichiers au format json
 
-**- SORTIES :** Fichiers au format WCSP
+**- SORTIES :** Fichiers au format [WCSP](https://github.com/toulbar2/toulbar2/raw/master/doc/wcspformat.pdf)
 
 ### _A Faire_
 
