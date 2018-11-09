@@ -118,10 +118,10 @@ public class COP implements ProblemAPI {
                 sum += regions[i];
             }
 
-            Var min = var("min", dom(range(sum+1)),
+            Var mini = var("mini", dom(range(sum+1)),
                     "min est le nombre de fréquence différentes utilisées");
-            nValues(allVar, EQ, min).note("Nombre de frequences differentes utilisees");
-            minimize(min);
+            nValues(allVar, EQ, mini).note("Nombre de frequences differentes utilisees");
+            minimize(mini);
         }
         //utiliser les frequences les plus basses possibles,
         if (modelVariant("m2"))
@@ -131,19 +131,19 @@ public class COP implements ProblemAPI {
         //minimiser la largeur de la bande de frequences utilisées
         if (modelVariant("m3"))
         {
-            Var min = var("min", dom(range(f_max+1)),
+            Var mini = var("mini", dom(range(f_max+1)),
                     "Frequence minimum utilisee");
-            Var max = var("max", dom(range(f_max+1)),
+            Var maxi = var("maxi", dom(range(f_max+1)),
                     "Frequence maximum utilisee");
-            Var dist = var("dist", dom(range(f_max+1)),
+            Var d = var("d", dom(range(f_max+1)),
                     "Ecart entre la plus haute et la plus basse frequence utilisees");
 
             Var[] allVar = vars(eme, rec);
-            minimum(allVar, min).note("Calcul la frequence minimale utilisée");
-            maximum(allVar, max).note("Calcul la frequence maximale utilisée");
-            equal(dist(min, max), dist).note("Calcul l'ecart entre min et max");
+            minimum(allVar, mini).note("Calcul la frequence minimale utilisée");
+            maximum(allVar, maxi).note("Calcul la frequence maximale utilisée");
+            equal(dist(mini, maxi), d).note("Calcul l'ecart entre min et max");
 
-            minimize(dist);
+            minimize(d);
         }
     }
 }
