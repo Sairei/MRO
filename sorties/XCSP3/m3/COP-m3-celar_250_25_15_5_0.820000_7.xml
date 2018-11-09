@@ -456,8 +456,8 @@
 <domain for="rec[248]"> 14 42 56 70 84 98 112 140 154 182 196 210 224 238 252 266 294 308 322 336 364 378 406 420 434 448 462 476 490 504 518 546 560 588 602 616 630 658 672 686 700 714 728 </domain>
 <domain for="rec[249]"> 14 28 42 56 70 84 98 112 126 140 154 168 182 196 210 224 238 252 266 280 294 308 322 336 350 364 378 392 406 420 434 448 462 476 490 504 518 532 546 574 588 602 616 630 644 658 672 686 700 714 728 </domain>
 </array>
-<var id="min" note="Frequence minimum utilisee"> 0..728 </var>
-<var id="max" note="Frequence maximum utilisee"> 0..728 </var>
+<var id="mini" note="Frequence minimum utilisee"> 0..728 </var>
+<var id="maxi" note="Frequence maximum utilisee"> 0..728 </var>
 <var id="dist" note="Ecart entre la plus haute et la plus basse frequence utilisees"> 0..728 </var>
 </variables>
 <constraints>
@@ -2068,13 +2068,13 @@
 </nValues>
 <minimum note="Calcul la frequence minimale utilisée">
 <list> eme[] rec[] </list>
-<condition> (eq,min) </condition>
+<condition> (eq,mini) </condition>
 </minimum>
 <maximum note="Calcul la frequence maximale utilisée">
 <list> eme[] rec[] </list>
-<condition> (eq,max) </condition>
+<condition> (eq,maxi) </condition>
 </maximum>
-<intension note="Calcul l'ecart entre min et max"> eq(dist(min,max),dist) </intension>
+<intension note="Calcul l'ecart entre mini et maxi"> eq(dist(mini,maxi),dist) </intension>
 </constraints>
 <objectives>
 <minimize> dist </minimize>

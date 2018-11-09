@@ -460,7 +460,7 @@
 <domain for="rec[247]"> 14 28 42 56 70 98 112 140 154 168 182 196 210 224 238 266 280 308 322 336 350 364 378 392 406 420 434 448 476 490 504 518 546 574 588 602 616 630 644 658 672 686 714 728 </domain>
 <domain for="rec[249]"> 28 42 70 84 98 112 126 140 154 168 182 196 210 224 280 294 308 322 336 350 364 378 392 406 420 434 462 476 490 518 532 560 574 588 602 630 644 672 686 700 714 728 </domain>
 </array>
-<var id="min" note="min est le nombre de fréquence différentes utilisées"> 0..478 </var>
+<var id="mini" note="mini est le nombre de fréquence différentes utilisées"> 0..478 </var>
 </variables>
 <constraints>
 <group note="Ecart de frequence entre eme et rec d'une station">
@@ -2084,10 +2084,10 @@
 </nValues>
 <nValues note="Nombre de frequences differentes utilisees">
 <list> eme[] rec[] </list>
-<condition> (eq,min) </condition>
+<condition> (eq,mini) </condition>
 </nValues>
 </constraints>
 <objectives>
-<minimize> min </minimize>
+<minimize> mini </minimize>
 </objectives>
 </instance>
