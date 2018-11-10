@@ -56,6 +56,6 @@ autant que possible les contraintes.
 
 ### _A Faire_
 
-- [ ] Modéliser le problème sous forme d’un CSP valué.
+- [x] Modéliser le problème sous forme d’un CSP valué.
 - [ ] Produire les instances correspondantes à partir des données fournies. On utilisera le format WCSP.
 - [ ] Résoudre les instances à l’aide du solveur Toulbar2.
