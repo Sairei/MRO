@@ -40,7 +40,7 @@ Dans cette première partie, on souhaite envisager différents problèmes d'opti
 
 - [x] Modéliser chacun de ces problèmes sous forme d’un COP.
 - [x] Produire les instances correspondantes à partir des donn´ees fournies. On utilisera le format XCSP3
-- [ ] Comparer l'efficacité de différents solveurs pour résoudre ces instances.
+- [x] Comparer l'efficacité de différents solveurs pour résoudre ces instances.
 
 ---
 ## 2. Problèmes de satisfaction de contraintes valués
@@ -58,4 +58,4 @@ autant que possible les contraintes.
 
 - [x] Modéliser le problème sous forme d’un CSP valué.
 - [x] Produire les instances correspondantes à partir des données fournies. On utilisera le format WCSP.
-- [ ] Résoudre les instances à l’aide du solveur Toulbar2.
+- [X] Résoudre les instances à l’aide du solveur Toulbar2.
