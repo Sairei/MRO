@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,6 +8,8 @@ import org.json.simple.parser.*;
 public class CP
 {
     String file;
+
+    ArrayList<ArrayList<Integer>> frequenciesByRegions;
 
     int[] regions;
     Station[] stations;
@@ -202,6 +203,22 @@ public class CP
         construct_regions(region);
         construct_interferences(interference);
         construct_liaisons(liaison);
+
+        frequenciesByRegions = new ArrayList<>();
+        for (int i = 0; i < regions.length; i++)
+            frequenciesByRegions.add(new ArrayList<>());
+
+        for (int i = 0; i < stations.length; i++) {
+            int r = stations[i].region;
+            for(int eme : stations[i].emetteur)
+                if(!frequenciesByRegions.get(r).contains(eme))
+                    frequenciesByRegions.get(r).add(eme);
+            for(int rec : stations[i].recepteur)
+                if(!frequenciesByRegions.get(r).contains(rec))
+                    frequenciesByRegions.get(r).add(rec);
+        }
+        for (int i = 0; i < regions.length; i++)
+            Collections.sort(frequenciesByRegions.get(i));
     }
 
 
@@ -235,16 +252,15 @@ public class CP
 
     public String pb_contraint()
     {
+        int cost;
         String contraint = "# contraints";
 
         // dist(eme[i], rec[i]) == stations[i].delta
-        int cost = 10_000;
-        contraint += "\n\n# abs(eme - rec) == delta  -> "+cost;
+        contraint += "\n\n# abs(eme - rec) == delta  -> INF";
         for(int i=0; i<stations.length; i++)
         {
-            contraint += "\nsoft(";
-            contraint += cost;
-            contraint += ", abs(";
+            contraint += "\nhard(";
+            contraint += "abs(";
             contraint += "eme"+i+"-"+"rec"+i;
             contraint += ")==";
             contraint += stations[i].delta;
@@ -252,8 +268,8 @@ public class CP
         }
 
         // dist(eme[x], eme[y]) >= interference[i].Delta
+        contraint += "\n\n# abs(eme[x] - eme[y]) == delta  -> 1000";
         cost = 1_000;
-        contraint += "\n\n# abs(eme[x] - eme[y]) == delta  -> "+cost;
         for(Interference i : interferences)
         {
             int x = i.x;
@@ -270,8 +286,8 @@ public class CP
         }
 
         // dist(eme[x], rec[y]) >= interference[i].Delta
+        contraint += "\n\n# abs(eme[x] - rec[y]) == delta  -> 1000";
         cost = 1_000;
-        contraint += "\n\n# abs(eme[x] - rec[y]) == delta  -> "+cost;
         for(Interference i : interferences)
         {
             int x = i.x;
@@ -288,8 +304,8 @@ public class CP
         }
 
         // dist(rec[x], eme[y]) >= interference[i].Delta
+        contraint += "\n\n# abs(rec[x] - eme[y]) == delta  -> 1000";
         cost = 1_000;
-        contraint += "\n\n# abs(rec[x] - eme[y]) == delta  -> "+cost;
         for(Interference i : interferences)
         {
             int x = i.x;
@@ -306,8 +322,8 @@ public class CP
         }
 
         // dist(rec[x], rec[y]) >= interference[i].Delta
+        contraint += "\n\n# abs(rec[x] - rec[y]) == delta  -> 1000";
         cost = 1_000;
-        contraint += "\n\n# abs(rec[x] - rec[y]) == delta  -> "+cost;
         for(Interference i : interferences)
         {
             int x = i.x;
@@ -319,7 +335,7 @@ public class CP
             contraint += ", abs(";
             contraint += "rec"+x+"-"+"rec"+y;
             contraint += ")==";
-            contraint += D;
+            contraint += 1D;
             contraint += ")";
         }
 
@@ -356,7 +372,6 @@ public class CP
             contraint += "eme"+y;
             contraint += ")";
         }
-
         return contraint;
     }
 
